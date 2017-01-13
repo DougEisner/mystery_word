@@ -1,3 +1,6 @@
+
+
+
 word_source = File.readlines('/usr/share/dict/words')
 
 words = word_source.map { |word| word.chomp.downcase }
