@@ -16,7 +16,7 @@ def select_random_word(word_list)
   word_list.sample
 end
 
-#Bryce's code to create list of 4-6 words
+# Bryce's code to create list of 4-6 words
 # def create_word_groups(words)
 #   words.select do |word|
 #     word.length == 4 or word.length == 5 or word.length == 6
