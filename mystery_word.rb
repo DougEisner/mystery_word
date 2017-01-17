@@ -1,4 +1,4 @@
-## Week1 / HW4 / mystery_word
+## mystery_word, HW4
 
 word_source = File.readlines('/usr/share/dict/words')
 
@@ -19,17 +19,9 @@ def find_guess_location(target_word, guess)
    (0 ... target_word.length).find_all { |i| target_word[i] == guess }
  end
 
-# # Bryce's code to create list of 4-6 words
-# # def create_word_groups(words)
-# #   words.select do |word|
-# #     word.length == 4 or word.length == 5 or word.length == 6
-# #   end
-# # end
-
 
 #############def main()
-#######################
-#######################
+
 play_again = 'yes'
 until play_again == "no"
   puts "Welcome to hangman.\nWould you like to play an easy, normal or hard game?"
@@ -103,7 +95,6 @@ until play_again == "no"
       guesses += 1
 
       #DISPLAY THE HANGMAN hangman_hash
-      #def display_hangman (hangman_hash, guess, length)
       print "\n\n"
       test_if_won = []
       times = length_target_word - length_target_word
@@ -118,8 +109,8 @@ until play_again == "no"
       test_if_won = test_if_won.delete (" ")
 
       if test_if_won == target_word
-        puts "\n\n YOU WON!!"
-        print "It took you #{guesses} guesses!\n\n"
+        puts "\n\nYOU WON!!"
+        print "\nIt took you #{guesses} guesses!\n\n"
         break
       elsif guesses == 8
         print "\n\n You LOST.  You have used your 8 guesses."
@@ -131,4 +122,3 @@ puts "Play again? yes or no"
 play_again = gets.chomp.to_s.downcase
 
 end
-
