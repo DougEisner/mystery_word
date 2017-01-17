@@ -1,10 +1,8 @@
-
-
-
+## Week1 / HW4 / mystery_word
 word_source = File.readlines('/usr/share/dict/words')
 
 words = word_source.map { |word| word.chomp.downcase }
-#
+
 def create_word_lists(words, min_number_letters, max_number_letters)
   list = []
   words.each do |word|
@@ -15,30 +13,11 @@ def create_word_lists(words, min_number_letters, max_number_letters)
   list
 end
 
-
 def find_guess_location(target_word, guess)
    (0 ... target_word.length).find_all { |i| target_word[i] == guess }
  end
- #
- # def find_guess_location(target_word, guess)
- #    (0 ... target_word.length).find_all { |i| target_word[i, 1] == guess }
- #  end
- # got this method from the internet. the 1 in the above [i, 1] didn't seem like
- #it was doing anything. removed it in the above, and still works.
-
-
-#
-# # Bryce's code to create list of 4-6 words
-# # def create_word_groups(words)
-# #   words.select do |word|
-# #     word.length == 4 or word.length == 5 or word.length == 6
-# #   end
-# # end
-
 
 #############def main()
-#######################
-#######################
 play_again = 'yes'
 until play_again == "no"
   puts "Welcome to hangman.\nWould you like to play an easy, normal or hard game?"
@@ -56,12 +35,11 @@ until play_again == "no"
     max_number_letters = 40
   end
 
-  puts "minimum = #{min_number_letters}"
-  puts "maximum = #{max_number_letters}"
-
   list_to_pick_from = create_word_lists(words, min_number_letters, max_number_letters)
   target_word = list_to_pick_from.sample
-  puts target_word
+
+  #Show target word for testing.
+  #puts target_word
 
   guesses = 0
   length_target_word = target_word.length
@@ -73,7 +51,6 @@ until play_again == "no"
   previous_guesses = []
 
   #DISPLAY THE HANGMAN HASH.  Empty at start.
-  #def display_hangman (hangman_hash, guess, length)
   times = 0
   while length_target_word > times
     print "#{hangman_hash[times]}"
@@ -82,9 +59,8 @@ until play_again == "no"
 
   while guesses < 8  #changed to 8 to allow only 8 guesses. But seems like it should be 9.
 
-
       print "\n\n\n" "Guess a letter: "
-      guess = gets.chomp
+      guess = gets.chomp.downcase
 
       if previous_guesses.include? guess
         puts "You guessed #{guess} already.  Not wise"
@@ -92,19 +68,17 @@ until play_again == "no"
         puts "Nice guess"
 
       elsif
-        puts "\n Bad guess"
+        puts "\nBad guess"
       end
 
       previous_guesses << guess
 
       correct_guess_index = find_guess_location(target_word, guess)
-      puts correct_guess_index
 
       #def update_hangman_hash
       correct_guess_index.each do |x|
         hangman_hash[x] = guess + " "
       end
-
 
       correct_guess_index = correct_guess_index.to_s
       class_correct_guess_index = correct_guess_index.class
@@ -112,7 +86,6 @@ until play_again == "no"
       guesses += 1
 
       #DISPLAY THE HANGMAN hangman_hash
-      #def display_hangman (hangman_hash, guess, length)
       print "\n\n"
       test_if_won = []
       times = length_target_word - length_target_word
@@ -127,8 +100,8 @@ until play_again == "no"
       test_if_won = test_if_won.delete (" ")
 
       if test_if_won == target_word
-        puts "\n\n YOU WON!!"
-        print "It took you #{guesses} guesses!\n\n"
+        puts "\n\nYOU WON!!"
+        print "\nIt took you #{guesses} guesses!\n\n"
         break
       elsif guesses == 8
         print "\n\n You LOST.  You have used your 8 guesses."
